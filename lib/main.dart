@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hexagonui/pages/detail/detail.dart';
 import 'package:hexagonui/pages/home/home.dart';
 
 final _router = GoRouter(
@@ -7,6 +8,14 @@ final _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => const Home(),
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'detail',
+          builder: (BuildContext context, GoRouterState state) {
+            return const Detail();
+          },
+        ),
+      ],
     ),
   ],
 );
