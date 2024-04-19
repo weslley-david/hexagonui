@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class Detail extends StatefulWidget {
-  const Detail({super.key});
+class ClientProfile extends StatefulWidget {
+  const ClientProfile({super.key});
 
   @override
-  State<Detail> createState() => _DetailState();
+  State<ClientProfile> createState() => _ClientProfileState();
 }
 
-class _DetailState extends State<Detail> {
+class _ClientProfileState extends State<ClientProfile> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

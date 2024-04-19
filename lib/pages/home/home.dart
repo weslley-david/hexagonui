@@ -14,7 +14,7 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   int _skip = 0;
-  int _take = 10;
+  final int _take = 10;
 
   Future<List<Client>> _getClientList() async {
     final Map<String, String> queryParams = {
@@ -129,8 +129,7 @@ class HomeState extends State<Home> {
                         return ListTile(
                           onTap: () => {},
                           leading: const CircleAvatar(child: Text('A')),
-                          title: Text('@${snapshot.data![index].identifier}' ??
-                              "not found"),
+                          title: Text('@${snapshot.data![index].identifier}'),
                           subtitle:
                               Text(snapshot.data![index].name ?? "not found"),
                         );
