@@ -41,18 +41,17 @@ class HomeState extends State<Home> {
     }
   }
 
-  void _loadMoreClients() {
-    setState(() {
-      _skip += _take;
-    });
+  void _loadPreviousPage() {
+    if (_skip >= _take) {
+      setState(() {
+        _skip -= _take;
+      });
+    }
   }
 
-  void _previousPage() {
+  void _loadNextPage() {
     setState(() {
-      _skip -= _take;
-      if (_skip < 0) {
-        _skip = 0;
-      }
+      _skip += _take;
     });
   }
 
@@ -93,57 +92,44 @@ class HomeState extends State<Home> {
       ),
       body: Column(
         children: [
-          Expanded(
-            child: FutureBuilder<List<Client>>(
-              future: _getClientList(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return NotificationListener<ScrollNotification>(
-                    onNotification: (ScrollNotification scrollInfo) {
-                      if (scrollInfo.metrics.pixels ==
-                          scrollInfo.metrics.maxScrollExtent) {
-                        _loadMoreClients();
-                      }
-                      return false;
-                    },
-                    child: ListView.builder(
-                      itemCount: snapshot.data!.length,
-                      itemBuilder: (context, index) {
-                        Client client = snapshot.data![index];
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: ListTile(
-                            tileColor: Colors.amber,
-                            title: Text(client.name ?? 'not fetched'),
-                            subtitle: Text(client.identifier ?? 'not fetched'),
-                            leading: const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  'https://cdn.pixabay.com/photo/2023/07/04/09/36/baby-8105822_1280.jpg'),
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return const Center(
-                    child: Text('Error loading client list'),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              },
-            ),
-          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              TextButton(onPressed: _previousPage, child: const Text("after")),
-              TextButton(
-                  onPressed: _loadMoreClients, child: const Text("next")),
+              ElevatedButton(
+                onPressed: _loadPreviousPage,
+                child: Icon(Icons.arrow_back),
+              ),
+              ElevatedButton(
+                onPressed: _loadNextPage,
+                child: Icon(Icons.arrow_forward),
+              ),
             ],
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: _getClientList(),
+              builder: (context, AsyncSnapshot<List<Client>> snapshot) {
+                if (snapshot.connectionState == ConnectionState.done) {
+                  if (snapshot.data == null) {
+                    return const Center(child: Text('Something went wrong'));
+                  }
+
+                  return ListView.builder(
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          onTap: () => {},
+                          leading: CircleAvatar(child: Text('A')),
+                          title: Text('@${snapshot.data![index].identifier}' ??
+                              "not found"),
+                          subtitle:
+                              Text(snapshot.data![index].name ?? "not found"),
+                        );
+                      });
+                }
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
           ),
         ],
       ),
