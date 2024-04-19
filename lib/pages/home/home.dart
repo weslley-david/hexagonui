@@ -59,7 +59,6 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
         title: const Text('Client List'),
       ),
       drawer: Drawer(
@@ -93,16 +92,26 @@ class HomeState extends State<Home> {
       body: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              ElevatedButton(
+              TextButton(
                 onPressed: _loadPreviousPage,
-                child: Icon(Icons.arrow_back),
+                child: const Text('<<'),
               ),
-              ElevatedButton(
+              const SizedBox(
+                width: 15.0,
+              ),
+              Text('$_skip / ${_take + _skip}'),
+              const SizedBox(
+                width: 15.0,
+              ),
+              TextButton(
                 onPressed: _loadNextPage,
-                child: Icon(Icons.arrow_forward),
+                child: const Text('>>'),
               ),
+              const SizedBox(
+                width: 15.0,
+              )
             ],
           ),
           Expanded(
@@ -119,7 +128,7 @@ class HomeState extends State<Home> {
                       itemBuilder: (context, index) {
                         return ListTile(
                           onTap: () => {},
-                          leading: CircleAvatar(child: Text('A')),
+                          leading: const CircleAvatar(child: Text('A')),
                           title: Text('@${snapshot.data![index].identifier}' ??
                               "not found"),
                           subtitle:
