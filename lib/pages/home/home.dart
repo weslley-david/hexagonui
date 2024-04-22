@@ -76,9 +76,8 @@ class HomeState extends State<Home> {
               child: Text('Drawer Header'),
             ),
             ListTile(
-              title: const Text('Detail'),
-              onTap: () => context.go('/detail'),
-            ),
+                title: const Text('Detail'),
+                onTap: () => context.goNamed('/users/helel')),
             ListTile(
               title: const Text('Item 2'),
               onTap: () {
@@ -127,7 +126,9 @@ class HomeState extends State<Home> {
                       itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          onTap: () => {},
+                          onTap: () => {
+                            context.push('/detail/${snapshot.data![index].id}')
+                          },
                           leading: const CircleAvatar(child: Text('A')),
                           title: Text('@${snapshot.data![index].identifier}'),
                           subtitle:

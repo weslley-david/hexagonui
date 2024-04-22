@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hexagonui/pages/clientProfile/clientprofile.dart';
+import 'package:hexagonui/pages/about/about.dart';
+import 'package:hexagonui/pages/detailclient/detailClient.dart';
 import 'package:hexagonui/pages/home/home.dart';
 
 final _router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
+      name: 'home',
       builder: (context, state) => const Home(),
-      routes: <RouteBase>[
-        GoRoute(
-          path: 'detail',
-          builder: (BuildContext context, GoRouterState state) {
-            return const ClientProfile();
-          },
-        ),
-      ],
+    ),
+    GoRoute(
+      path: '/users/:userId',
+      builder: (context, state) {
+        final userId =
+            state.pathParameters['userId'] ?? ''; // Providing a default value
+        return About(name: userId);
+      },
+    ),
+    GoRoute(
+      path: '/detail/:userId',
+      builder: (context, state) {
+        final userId =
+            state.pathParameters['userId'] ?? ''; // Providing a default value
+        return DetailClient(id: userId);
+      },
     ),
   ],
 );
+
 void main() {
   runApp(const MyApp());
 }
