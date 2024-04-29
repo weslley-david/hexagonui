@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexagonui/pages/about/about.dart';
-import 'package:hexagonui/pages/detailclient/detailClient.dart';
+import 'package:hexagonui/pages/detailclient/detail_client.dart';
 import 'package:hexagonui/pages/home/home.dart';
 
 final _router = GoRouter(
