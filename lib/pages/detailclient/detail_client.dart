@@ -39,6 +39,9 @@ class _DetailClientState extends State<DetailClient> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("about"),
+      ),
       body: FutureBuilder(
         future: _userDetailsFuture,
         builder: (context, AsyncSnapshot<Client> snapshot) {
