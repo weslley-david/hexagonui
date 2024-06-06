@@ -1,18 +1,23 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:hexagonui/models/Client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/client.dart';
-
-class Home extends StatefulWidget {
-  const Home({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  HomeState createState() => HomeState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class HomeState extends State<Home> {
+class _HomePageState extends State<HomePage> {
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   int _skip = 0;
   final int _take = 10;
 
@@ -59,8 +64,10 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Client List'),
-      ),
+          //title: Text("acompanhar"),
+          actions: const [
+            Image(image: AssetImage('assets/images/logo.png')),
+          ]),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the drawer if there isn't enough vertical
@@ -71,19 +78,49 @@ class HomeState extends State<Home> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                image: DecorationImage(
+                  image: AssetImage('assets/images/background.png'),
+                  fit: BoxFit.cover,
+                ),
               ),
-              child: Text('Drawer Header'),
+              child: Text('v 0.1.0 (^~^)'),
             ),
             ListTile(
-                title: const Text('Detail'),
-                onTap: () => context.goNamed('/users/helel')),
+              title: const Text('Adicionar cliente'),
+              onTap: () {},
+              leading: const Icon(Icons.add),
+            ),
             ListTile(
-              title: const Text('Item 2'),
+              title: const Text('Gerir clientes'),
               onTap: () {
                 // Update the state of the app.
                 // ...
               },
+              leading: const Icon(Icons.person_2_outlined),
+            ),
+            ListTile(
+              title: const Text('Editar meu perfil'),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+              leading: const Icon(
+                Icons.edit_outlined,
+              ),
+            ),
+            ListTile(
+              title: const Text(
+                'Sair',
+                style: TextStyle(color: Colors.redAccent),
+              ),
+              onTap: () {
+                // Update the state of the app.
+                // ...
+              },
+              leading: const Icon(
+                Icons.exit_to_app_outlined,
+                color: Colors.redAccent,
+              ),
             ),
           ],
         ),
@@ -125,14 +162,36 @@ class HomeState extends State<Home> {
                   return ListView.builder(
                       itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) {
-                        return ListTile(
-                          onTap: () => {
-                            context.push('/detail/${snapshot.data![index].id}')
-                          },
-                          leading: const CircleAvatar(child: Text('A')),
-                          title: Text('@${snapshot.data![index].identifier}'),
-                          subtitle:
-                              Text(snapshot.data![index].name ?? "not found"),
+                        return Container(
+                          decoration: BoxDecoration(
+                            //border: Border.all(width: 3.0, color: Colors.red),
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Color(0xFF070707),
+                          ),
+                          //padding: EdgeInsets.all(20.0),
+                          margin: const EdgeInsets.all(2.0),
+                          child: ListTile(
+                            onTap: () => {
+                              context.push(
+                                  '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
+                            },
+                            leading: const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "https://hexagon-no2i.onrender.com/static/client.png"),
+                            ),
+                            title: Text(
+                              '@${snapshot.data![index].identifier}',
+                            ),
+                            subtitle: Text(
+                              snapshot.data![index].name ?? "not found",
+                            ),
+                            trailing: TextButton(
+                              child: const Icon(
+                                Icons.content_paste_go_rounded,
+                              ),
+                              onPressed: () => {},
+                            ),
+                          ),
                         );
                       });
                 }
