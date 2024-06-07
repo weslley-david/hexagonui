@@ -8,6 +8,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -47,16 +48,18 @@ class _LoginPageState extends State<LoginPage> {
         await prefs.setString('type', data['type']);
 
         // Navegar para a HomePage
+        // ignore: use_build_context_synchronously
         context.go('/home');
       } else {
         // Handle sign-in failure
-        print(response.statusCode);
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Sign-in failed')),
         );
       }
     } else {
       // Handle server error
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Failed to load data from server')),
       );

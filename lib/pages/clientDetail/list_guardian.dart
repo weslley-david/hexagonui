@@ -1,19 +1,19 @@
 import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:hexagonui/models/Specialist.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:hexagonui/models/guardian.dart';
 
-class SpecialistList extends StatefulWidget {
+class GuardianList extends StatefulWidget {
   final String clientId;
 
-  const SpecialistList({super.key, required this.clientId});
+  const GuardianList({super.key, required this.clientId});
 
   @override
-  _SpecialistListState createState() => _SpecialistListState();
+  State<GuardianList> createState() => _GuardianListState();
 }
 
-class _SpecialistListState extends State<SpecialistList> {
-  Future<List<Specialist>> _getSpecialistList() async {
+class _GuardianListState extends State<GuardianList> {
+  Future<List<Guardian>> _getGuardianList() async {
     final Map<String, String> queryParams = {
       'skip': '0',
       'take': '2',
@@ -21,7 +21,7 @@ class _SpecialistListState extends State<SpecialistList> {
     };
 
     final uri = Uri.https(
-        'hexagon-no2i.onrender.com', '/specialist/byclient', queryParams);
+        'hexagon-no2i.onrender.com', '/guardian/byclient', queryParams);
 
     final response = await http.get(
       uri,
@@ -32,39 +32,36 @@ class _SpecialistListState extends State<SpecialistList> {
 
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
-      return jsonList.map((item) => Specialist.fromJson(item)).toList();
+      return jsonList.map((item) => Guardian.fromJson(item)).toList();
     } else {
-      throw Exception('Failed to load specialist list');
+      throw Exception('Failed to load guardian list');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Specialists'),
-      // ),
-      body: FutureBuilder<List<Specialist>>(
-        future: _getSpecialistList(),
+      body: FutureBuilder<List<Guardian>>(
+        future: _getGuardianList(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return const Center(child: Text('Failed to load specialists'));
+            return const Center(child: Text('Failed to load guardians'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No specialists found'));
+            return const Center(child: Text('No guardians found'));
           } else {
-            final specialists = snapshot.data!;
+            final guardian = snapshot.data!;
             return ListView.builder(
-              itemCount: specialists.length,
+              itemCount: guardian.length,
               itemBuilder: (context, index) {
-                final specialist = specialists[index];
+                final guardians = guardian[index];
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: NetworkImage("${specialist.imageurl}"),
+                    backgroundImage: NetworkImage("${guardians.imageurl}"),
                   ),
-                  title: Text("@${specialist.identifier}"),
-                  subtitle: Text("${specialist.bio}"),
+                  title: Text("@${guardians.identifier}"),
+                  subtitle: Text("${guardians.bio}"),
                   onTap: () {
                     // Implement navigation or any action here if needed
                   },

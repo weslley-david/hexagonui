@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hexagonui/models/AtecResult.dart';
+import 'package:hexagonui/models/atec_result.dart';
 import 'package:http/http.dart' as http;
 
 class AtecInsights extends StatefulWidget {

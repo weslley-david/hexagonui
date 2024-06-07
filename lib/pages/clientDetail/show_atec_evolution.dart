@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'package:hexagonui/models/AtecEvolution.dart';
+import 'package:hexagonui/models/atec_evolution.dart';
 
 class ShowAtecEvolution extends StatefulWidget {
   final String clientId;
@@ -9,6 +9,7 @@ class ShowAtecEvolution extends StatefulWidget {
   const ShowAtecEvolution({super.key, required this.clientId});
 
   @override
+  // ignore: library_private_types_in_public_api
   _ShowAtecEvolutionState createState() => _ShowAtecEvolutionState();
 }
 

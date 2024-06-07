@@ -1,13 +1,13 @@
+// ignore: file_names
 import 'dart:convert';
 import 'package:go_router/go_router.dart';
-import 'package:hexagonui/pages/clientDetail/ateccInsights.dart';
-import 'package:hexagonui/pages/clientDetail/listGuardian.dart';
+import 'package:hexagonui/pages/clientDetail/atecc_insights.dart';
+import 'package:hexagonui/pages/clientDetail/list_guardian.dart';
 import 'package:hexagonui/pages/clientDetail/show_atec_evolution.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
-import 'package:hexagonui/models/Client.dart';
-import 'package:hexagonui/models/Specialist.dart';
-import 'listSpecialist.dart';
+import 'package:hexagonui/models/client.dart';
+import 'list_specialist.dart';
 
 class ClientDetail extends StatefulWidget {
   final String id;
@@ -33,31 +33,6 @@ class _ClientDetailState extends State<ClientDetail>
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  Future<List<Specialist>> _getSpecialistList() async {
-    final Map<String, String> queryParams = {
-      'skip': '0',
-      'take': '30',
-      'client': widget.id
-    };
-
-    final uri = Uri.https(
-        'hexagon-no2i.onrender.com', '/specialist/byclient', queryParams);
-
-    final response = await http.get(
-      uri,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    );
-
-    if (response.statusCode == 200) {
-      List<dynamic> jsonList = jsonDecode(response.body);
-      return jsonList.map((item) => Specialist.fromJson(item)).toList();
-    } else {
-      throw Exception('Failed to load specialist list');
-    }
   }
 
   Future<Client> fetchUsuario() async {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hexagonui/pages/atec/atec.dart';
-import 'package:hexagonui/pages/clientDetail/clientDetail.dart';
+import 'package:hexagonui/pages/clientDetail/client_detail.dart';
 import 'package:hexagonui/pages/home/home.dart';
 import 'package:hexagonui/pages/login/login.dart';
 
@@ -23,7 +23,7 @@ final _router = GoRouter(
       name: 'atec',
       builder: (context, state) {
         final userId = state.pathParameters['id'] ?? '0';
-        return Atec(Client: userId);
+        return Atec(client: userId);
       },
     ),
     GoRoute(

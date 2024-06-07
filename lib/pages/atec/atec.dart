@@ -70,8 +70,8 @@ class Answer {
 }
 
 class Atec extends StatefulWidget {
-  final String Client;
-  const Atec({super.key, required this.Client});
+  final String client;
+  const Atec({super.key, required this.client});
 
   @override
   State<Atec> createState() => _AtecState();
@@ -3275,17 +3275,15 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
         alternativeId: entry.value,
       );
     }).toList();
-
-    print(widget.Client);
     Map<String, dynamic> submission = {
       "title": _titleController.text,
       "notes": _observationController.text,
-      "client": int.parse(widget.Client),
+      "client": int.parse(widget.client),
       "answers": answers.map((answer) => answer.toJson()).toList(),
     };
 
     if (answers.length != 77) {
-      String jsonSubmission = json.encode(submission);
+      //String jsonSubmission = json.encode(submission);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Todas as questões precisam ser respondidas.'),
@@ -3306,16 +3304,17 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
     );
 
     if (response.statusCode == 200) {
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Enviado com sucesso'),
           backgroundColor: Colors.green,
         ),
       );
+      // ignore: use_build_context_synchronously
       context.pop();
     } else {
-      print(response.body);
-      // Handle server error
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Falha ao enviar os dados'),
@@ -3371,7 +3370,6 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
                                 onChanged: (int? value) {
                                   setState(() {
                                     selectedAlternatives[question.id] = value!;
-                                    print(selectedAlternatives);
                                   });
                                 },
                               );
