@@ -139,7 +139,7 @@ class _ClientDetailState extends State<ClientDetail>
                         text: "cliente",
                       ),
                       Tab(
-                        icon: Icon(Icons.graphic_eq_outlined),
+                        icon: Icon(Icons.auto_graph_outlined),
                         text: "cliente",
                       ),
                       Tab(
@@ -152,7 +152,7 @@ class _ClientDetailState extends State<ClientDetail>
                       ),
                     ],
                   ),
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.5,
                     child: TabBarView(
                       controller: _tabController,
@@ -171,7 +171,7 @@ class _ClientDetailState extends State<ClientDetail>
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {context.push('/atec')},
+        onPressed: () => {context.push('/atec/${widget.id}')},
         child: const Icon(
           Icons.content_paste_go_rounded,
           color: Colors.white,

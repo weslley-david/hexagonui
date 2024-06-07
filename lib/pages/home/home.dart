@@ -27,14 +27,15 @@ class _HomePageState extends State<HomePage> {
       'take': '$_take',
       "specialist": '1',
     };
-
-    final uri =
-        Uri.https('hexagon-no2i.onrender.com', '/client/list', queryParams);
+    String? token = await getAccessToken();
+    final uri = Uri.https(
+        'hexagon-no2i.onrender.com', '/client/byspecialist', queryParams);
 
     final response = await http.get(
       uri,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': 'Bearer $token',
       },
     );
 
@@ -128,7 +129,7 @@ class _HomePageState extends State<HomePage> {
       body: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextButton(
                 onPressed: _loadPreviousPage,
@@ -166,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                           decoration: BoxDecoration(
                             //border: Border.all(width: 3.0, color: Colors.red),
                             borderRadius: BorderRadius.circular(5.0),
-                            color: Color(0xFF070707),
+                            color: const Color(0xFF070707),
                           ),
                           //padding: EdgeInsets.all(20.0),
                           margin: const EdgeInsets.all(2.0),

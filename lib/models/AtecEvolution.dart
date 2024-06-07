@@ -7,15 +7,15 @@ class AtecEvolution {
     if (json['evolution'] != null) {
       evolution = <Evolution>[];
       json['evolution'].forEach((v) {
-        evolution!.add(new Evolution.fromJson(v));
+        evolution!.add(Evolution.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.evolution != null) {
-      data['evolution'] = this.evolution!.map((v) => v.toJson()).toList();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (evolution != null) {
+      data['evolution'] = evolution!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -33,9 +33,9 @@ class Evolution {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['area'] = this.area;
-    data['score'] = this.score;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['area'] = area;
+    data['score'] = score;
     return data;
   }
 }

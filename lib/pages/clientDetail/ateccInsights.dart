@@ -51,8 +51,8 @@ class _AtecInsightsState extends State<AtecInsights> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+                const Padding(
+                  padding: EdgeInsets.all(16.0),
                   child: Text(
                     'ATEC Results',
                     //style: Theme.of(context).textTheme.headline6,

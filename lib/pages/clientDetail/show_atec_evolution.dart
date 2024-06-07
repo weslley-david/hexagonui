@@ -6,7 +6,7 @@ import 'package:hexagonui/models/AtecEvolution.dart';
 class ShowAtecEvolution extends StatefulWidget {
   final String clientId;
 
-  const ShowAtecEvolution({Key? key, required this.clientId}) : super(key: key);
+  const ShowAtecEvolution({super.key, required this.clientId});
 
   @override
   _ShowAtecEvolutionState createState() => _ShowAtecEvolutionState();

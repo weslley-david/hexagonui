@@ -19,9 +19,12 @@ final _router = GoRouter(
       builder: (context, state) => const LoginPage(),
     ),
     GoRoute(
-      path: '/atec',
+      path: '/atec/:id',
       name: 'atec',
-      builder: (context, state) => const Atec(),
+      builder: (context, state) {
+        final userId = state.pathParameters['id'] ?? '0';
+        return Atec(Client: userId);
+      },
     ),
     GoRoute(
         path: '/detailclient/:id/:name', // Replace with your actual path

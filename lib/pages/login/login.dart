@@ -72,11 +72,11 @@ class _LoginPageState extends State<LoginPage> {
       // ),
       body: Container(
         decoration: const BoxDecoration(
-            // image: DecorationImage(
-            //   image: AssetImage('assets/images/background.png'),
-            //   fit: BoxFit.cover,
-            // ),
-            ),
+          image: DecorationImage(
+            image: AssetImage('assets/images/background.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
@@ -84,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               TextField(
                 controller: _emailController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Email: ',
                   filled: true,
                   //fillColor: Colors.white,
@@ -93,12 +93,12 @@ class _LoginPageState extends State<LoginPage> {
                   // ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 50.0,
               ),
               TextField(
                 controller: _passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Password: ',
                   filled: true,
                   //fillColor: Colors.white,
