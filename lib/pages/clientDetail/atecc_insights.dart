@@ -14,10 +14,10 @@ class AtecInsights extends StatefulWidget {
 
 class _AtecInsightsState extends State<AtecInsights> {
   Future<List<AtecResult>> _getAtecResultsList() async {
-    final Map<String, String> queryParams = {'client': '12'};
+    final Map<String, String> queryParams = {'client': widget.clientId};
 
     final uri = Uri.https(
-        'hexagon-no2i.onrender.com', '/atec/resultbyavaliationid', queryParams);
+        'hexagon-no2i.onrender.com', '/atec/resultbyclientid', queryParams);
 
     final response = await http.get(
       uri,
