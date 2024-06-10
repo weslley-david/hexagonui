@@ -17,7 +17,7 @@ class _AtecInsightsState extends State<AtecInsights> {
     final Map<String, String> queryParams = {'client': widget.clientId};
 
     final uri = Uri.https(
-        'hexagon-no2i.onrender.com', '/atec/resultbyclientid', queryParams);
+        'hexagon-no2i.onrender.com', '/atec/resultoflasttest', queryParams);
 
     final response = await http.get(
       uri,
@@ -30,6 +30,7 @@ class _AtecInsightsState extends State<AtecInsights> {
       List<dynamic> jsonList = jsonDecode(response.body);
       return jsonList.map((item) => AtecResult.fromJson(item)).toList();
     } else {
+      print(response.body);
       throw Exception('Failed to load guardian list');
     }
   }

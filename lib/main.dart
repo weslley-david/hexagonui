@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
+        //--------------------------------------------
         // theme: ThemeData(
         //   colorScheme: ColorScheme.fromSeed(
         //     seedColor: Colors.lightBlue,
@@ -78,62 +79,53 @@ class MyApp extends StatelessWidget {
         //     bodySmall: TextStyle(color: Colors.white),
         //   ),
         // ),
-        theme: ThemeData(
-          brightness: Brightness.dark, // Define o tema como escuro
-          primaryColor: Colors.lightBlue,
-          scaffoldBackgroundColor: const Color(0xFF121212),
-          appBarTheme: const AppBarTheme(
-            backgroundColor: Color(0xFF1F1F1F),
-            foregroundColor: Colors.white,
-          ),
-          drawerTheme: const DrawerThemeData(
-            backgroundColor: Color(0xFF1F1F1F),
-            elevation: 16,
-          ),
-          cardColor: const Color(0xFF1F1F1F),
-          // textTheme: const TextTheme(
-          //   bodyText1: TextStyle(color: Colors.white),
-          //   bodyText2: TextStyle(color: Colors.white70),
-          //   headline1: TextStyle(color: Colors.white),
-          //   headline2: TextStyle(color: Colors.white),
-          //   headline3: TextStyle(color: Colors.white),
-          //   headline4: TextStyle(color: Colors.white),
-          //   headline5: TextStyle(color: Colors.white),
-          //   headline6: TextStyle(color: Colors.white),
-          // ),
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-          inputDecorationTheme: const InputDecorationTheme(
-            filled: true,
-            fillColor: Color(0xFF303030),
-            // enabledBorder: OutlineInputBorder(
-            //   borderSide: BorderSide(color: Colors.red),
-            // ),
-            focusedBorder: OutlineInputBorder(
-                //borderSide: BorderSide(color: Colors.lightBlue, width: 1.0),
-                ),
-            //labelStyle: TextStyle(color: Colors.green),
-            hintStyle: TextStyle(color: Colors.white),
-          ),
-          buttonTheme: const ButtonThemeData(
-            buttonColor: Colors.lightBlue,
-            textTheme: ButtonTextTheme.primary,
-          ),
-          elevatedButtonTheme: ElevatedButtonThemeData(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
-              foregroundColor: Colors.white,
-            ),
-          ),
-          floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.lightBlue,
-          ),
-          checkboxTheme: CheckboxThemeData(
-            checkColor: MaterialStateProperty.all(Colors.white),
-            fillColor: MaterialStateProperty.all(Colors.lightBlue),
-          ),
-        ),
+        //------------------------------------------------------
+        // theme: ThemeData(
+        //   brightness: Brightness.dark, // Define o tema como escuro
+        //   primaryColor: Colors.lightBlue,
+        //   scaffoldBackgroundColor: const Color(0xFF121212),
+        //   appBarTheme: const AppBarTheme(
+        //     backgroundColor: Color(0xFF1F1F1F),
+        //     foregroundColor: Colors.white,
+        //   ),
+        //   drawerTheme: const DrawerThemeData(
+        //     backgroundColor: Color(0xFF1F1F1F),
+        //     elevation: 16,
+        //   ),
+        //   cardColor: const Color(0xFF1F1F1F),
+        //   iconTheme: const IconThemeData(
+        //     color: Colors.white,
+        //   ),
+        //   inputDecorationTheme: const InputDecorationTheme(
+        //     filled: true,
+        //     fillColor: Color(0xFF303030),
+        //     // enabledBorder: OutlineInputBorder(
+        //     //   borderSide: BorderSide(color: Colors.red),
+        //     // ),
+        //     focusedBorder: OutlineInputBorder(
+        //         //borderSide: BorderSide(color: Colors.lightBlue, width: 1.0),
+        //         ),
+        //     //labelStyle: TextStyle(color: Colors.green),
+        //     hintStyle: TextStyle(color: Colors.white),
+        //   ),
+        //   buttonTheme: const ButtonThemeData(
+        //     buttonColor: Colors.lightBlue,
+        //     textTheme: ButtonTextTheme.primary,
+        //   ),
+        //   elevatedButtonTheme: ElevatedButtonThemeData(
+        //     style: ElevatedButton.styleFrom(
+        //       backgroundColor: Colors.lightBlue,
+        //       foregroundColor: Colors.white,
+        //     ),
+        //   ),
+        //   floatingActionButtonTheme: const FloatingActionButtonThemeData(
+        //     backgroundColor: Colors.lightBlue,
+        //   ),
+        //   checkboxTheme: CheckboxThemeData(
+        //     checkColor: MaterialStateProperty.all(Colors.white),
+        //     fillColor: MaterialStateProperty.all(Colors.lightBlue),
+        //   ),
+        // ),
         routerConfig: _router);
   }
 }
