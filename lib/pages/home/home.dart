@@ -88,7 +88,9 @@ class _HomePageState extends State<HomePage> {
             ),
             ListTile(
               title: const Text('Adicionar cliente'),
-              onTap: () {},
+              onTap: () {
+                context.push('/addclient');
+              },
               leading: const Icon(Icons.add),
             ),
             ListTile(
@@ -165,7 +167,9 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return Container(
                           decoration: BoxDecoration(
-                            //border: Border.all(width: 3.0, color: Colors.red),
+                            border: Border.all(
+                              width: 1.0,
+                            ),
                             borderRadius: BorderRadius.circular(5.0),
                             color: const Color(0xFF070707),
                           ),
@@ -186,12 +190,12 @@ class _HomePageState extends State<HomePage> {
                             subtitle: Text(
                               snapshot.data![index].name ?? "not found",
                             ),
-                            trailing: TextButton(
-                              child: const Icon(
-                                Icons.content_paste_go_rounded,
-                              ),
-                              onPressed: () => {},
-                            ),
+                            // trailing: TextButton(
+                            //   child: const Icon(
+                            //     Icons.content_paste_go_rounded,
+                            //   ),
+                            //   onPressed: () => {},
+                            // ),
                           ),
                         );
                       });

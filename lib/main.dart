@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hexagonui/pages/addClient/add_client.dart';
 import 'package:hexagonui/pages/atec/atec.dart';
 import 'package:hexagonui/pages/clientDetail/client_detail.dart';
 import 'package:hexagonui/pages/home/home.dart';
@@ -40,6 +41,10 @@ final _router = GoRouter(
             name: userName,
           );
         }),
+    GoRoute(
+        path: '/addclient',
+        name: 'addclient',
+        builder: (context, state) => const AddClient())
   ],
 );
 
@@ -80,52 +85,52 @@ class MyApp extends StatelessWidget {
         //   ),
         // ),
         //------------------------------------------------------
-        // theme: ThemeData(
-        //   brightness: Brightness.dark, // Define o tema como escuro
-        //   primaryColor: Colors.lightBlue,
-        //   scaffoldBackgroundColor: const Color(0xFF121212),
-        //   appBarTheme: const AppBarTheme(
-        //     backgroundColor: Color(0xFF1F1F1F),
-        //     foregroundColor: Colors.white,
-        //   ),
-        //   drawerTheme: const DrawerThemeData(
-        //     backgroundColor: Color(0xFF1F1F1F),
-        //     elevation: 16,
-        //   ),
-        //   cardColor: const Color(0xFF1F1F1F),
-        //   iconTheme: const IconThemeData(
-        //     color: Colors.white,
-        //   ),
-        //   inputDecorationTheme: const InputDecorationTheme(
-        //     filled: true,
-        //     fillColor: Color(0xFF303030),
-        //     // enabledBorder: OutlineInputBorder(
-        //     //   borderSide: BorderSide(color: Colors.red),
-        //     // ),
-        //     focusedBorder: OutlineInputBorder(
-        //         //borderSide: BorderSide(color: Colors.lightBlue, width: 1.0),
-        //         ),
-        //     //labelStyle: TextStyle(color: Colors.green),
-        //     hintStyle: TextStyle(color: Colors.white),
-        //   ),
-        //   buttonTheme: const ButtonThemeData(
-        //     buttonColor: Colors.lightBlue,
-        //     textTheme: ButtonTextTheme.primary,
-        //   ),
-        //   elevatedButtonTheme: ElevatedButtonThemeData(
-        //     style: ElevatedButton.styleFrom(
-        //       backgroundColor: Colors.lightBlue,
-        //       foregroundColor: Colors.white,
-        //     ),
-        //   ),
-        //   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-        //     backgroundColor: Colors.lightBlue,
-        //   ),
-        //   checkboxTheme: CheckboxThemeData(
-        //     checkColor: MaterialStateProperty.all(Colors.white),
-        //     fillColor: MaterialStateProperty.all(Colors.lightBlue),
-        //   ),
-        // ),
+        theme: ThemeData(
+          brightness: Brightness.dark, // Define o tema como escuro
+          primaryColor: Colors.lightBlue,
+          scaffoldBackgroundColor: const Color(0xFF121212),
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Color(0xFF1F1F1F),
+            foregroundColor: Colors.white,
+          ),
+          drawerTheme: const DrawerThemeData(
+            backgroundColor: Color(0xFF1F1F1F),
+            elevation: 16,
+          ),
+          cardColor: const Color(0xFF1F1F1F),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            fillColor: Color(0xFF303030),
+            // enabledBorder: OutlineInputBorder(
+            //   borderSide: BorderSide(color: Colors.red),
+            // ),
+            focusedBorder: OutlineInputBorder(
+                //borderSide: BorderSide(color: Colors.lightBlue, width: 1.0),
+                ),
+            //labelStyle: TextStyle(color: Colors.green),
+            hintStyle: TextStyle(color: Colors.white),
+          ),
+          buttonTheme: const ButtonThemeData(
+            buttonColor: Colors.lightBlue,
+            textTheme: ButtonTextTheme.primary,
+          ),
+          elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.lightBlue,
+              foregroundColor: Colors.white,
+            ),
+          ),
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.lightBlue,
+          ),
+          checkboxTheme: CheckboxThemeData(
+            checkColor: MaterialStateProperty.all(Colors.white),
+            fillColor: MaterialStateProperty.all(Colors.lightBlue),
+          ),
+        ),
         routerConfig: _router);
   }
 }

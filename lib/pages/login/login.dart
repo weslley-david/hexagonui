@@ -133,12 +133,17 @@ class _LoginPageState extends State<LoginPage> {
                                           'Por favor, entrar em contato com weslleydavid343@gmail.com')),
                                 );
                               },
-                              child: const Text('Cadastrar'),
+                              child: const Text(
+                                'Cadastrar',
+                              ),
                             ),
                           ),
                           const SizedBox(width: 10),
                           Expanded(
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.blueAccent,
+                              ),
                               onPressed: () async {
                                 final email = _emailController.text;
                                 final password = _passwordController.text;

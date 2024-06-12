@@ -30,7 +30,6 @@ class _AtecInsightsState extends State<AtecInsights> {
       List<dynamic> jsonList = jsonDecode(response.body);
       return jsonList.map((item) => AtecResult.fromJson(item)).toList();
     } else {
-      print(response.body);
       throw Exception('Failed to load guardian list');
     }
   }

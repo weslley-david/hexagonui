@@ -2,6 +2,7 @@
 import 'dart:convert';
 import 'package:go_router/go_router.dart';
 import 'package:hexagonui/pages/clientDetail/atecc_insights.dart';
+import 'package:hexagonui/pages/clientDetail/list_avaliations.dart';
 import 'package:hexagonui/pages/clientDetail/list_guardian.dart';
 import 'package:hexagonui/pages/clientDetail/show_atec_evolution.dart';
 import 'package:http/http.dart' as http;
@@ -26,7 +27,7 @@ class _ClientDetailState extends State<ClientDetail>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 4, vsync: this);
+    _tabController = TabController(length: 5, vsync: this);
   }
 
   @override
@@ -125,6 +126,10 @@ class _ClientDetailState extends State<ClientDetail>
                         icon: Icon(Icons.family_restroom),
                         text: "familiares",
                       ),
+                      Tab(
+                        icon: Icon(Icons.list),
+                        text: "avaliações atec",
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -135,7 +140,8 @@ class _ClientDetailState extends State<ClientDetail>
                         AtecInsights(clientId: "${usuario.id}"),
                         ShowAtecEvolution(clientId: "${usuario.id}"),
                         SpecialistList(clientId: "${usuario.id}"),
-                        GuardianList(clientId: "${usuario.id}")
+                        GuardianList(clientId: "${usuario.id}"),
+                        ListAvaliations(clientId: "${usuario.id}")
                       ],
                     ),
                   ),
