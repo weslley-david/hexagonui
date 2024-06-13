@@ -15,6 +15,8 @@ class ShowAtecEvolution extends StatefulWidget {
 
 class _ShowAtecEvolutionState extends State<ShowAtecEvolution> {
   List<Evolution> _evolutionData = [];
+  bool _isLoading = true;
+  bool _hasError = false;
 
   @override
   void initState() {
@@ -23,47 +25,65 @@ class _ShowAtecEvolutionState extends State<ShowAtecEvolution> {
   }
 
   Future<void> _fetchAtecEvolution() async {
-    final response = await http.get(Uri.parse(
-        'https://hexagon-no2i.onrender.com/atec/listevolutionbyarea?client=${widget.clientId}')); // Coloque a URL do seu endpoint aqui
-    if (response.statusCode == 200) {
+    try {
+      final response = await http.get(Uri.parse(
+          'https://hexagon-no2i.onrender.com/atec/listevolutionbyarea?client=${widget.clientId}')); // Coloque a URL do seu endpoint aqui
+      if (response.statusCode == 200) {
+        setState(() {
+          final jsonBody = jsonDecode(response.body);
+          if (jsonBody['evolution'] != null &&
+              jsonBody['evolution'].isNotEmpty) {
+            _evolutionData = (jsonBody['evolution'] as List)
+                .map((e) => Evolution.fromJson(e))
+                .toList();
+          } else {
+            _evolutionData = [];
+          }
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _hasError = true;
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
       setState(() {
-        final jsonBody = jsonDecode(response.body);
-        _evolutionData = (jsonBody['evolution'] as List)
-            .map((e) => Evolution.fromJson(e))
-            .toList();
+        _hasError = true;
+        _isLoading = false;
       });
-    } else {
-      throw Exception('Failed to load Atec Evolution');
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Atec Evolution'),
-      // ),
-      body: ListView.builder(
-        itemCount: _evolutionData.length,
-        itemBuilder: (context, index) {
-          return Column(
-            children: [
-              ListTile(
-                title: Text(_evolutionData[index].area ?? ''),
-                //subtitle: Text(_evolutionData[index].score.toString()),
-              ),
-              SizedBox(
-                height: 200,
-                width: MediaQuery.of(context).size.width *
-                    0.9, // 90% da largura da tela
-                child: CustomPaint(
-                  painter: BarChartPainter(_evolutionData[index].score),
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _hasError
+              ? const Center(child: Text('Failed to load data'))
+              : _evolutionData.isEmpty
+                  ? const Center(child: Text('No data available'))
+                  : ListView.builder(
+                      itemCount: _evolutionData.length,
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            ListTile(
+                              title: Text(_evolutionData[index].area ?? ''),
+                            ),
+                            SizedBox(
+                              height: 200,
+                              width: MediaQuery.of(context).size.width * 0.9,
+                              child: CustomPaint(
+                                painter: BarChartPainter(
+                                    _evolutionData[index].score),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
     );
   }
 }
