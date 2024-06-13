@@ -118,7 +118,7 @@ class _LoginPageState extends State<LoginPage> {
                   ? const CircularProgressIndicator(
                       strokeCap: StrokeCap.square,
                       color: Colors.white,
-                      backgroundColor: Colors.blue,
+                      backgroundColor: Colors.deepPurpleAccent,
                     )
                   : SizedBox(
                       width: double.infinity,
@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                           Expanded(
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.blueAccent,
+                                backgroundColor: Colors.deepPurple[400],
                               ),
                               onPressed: () async {
                                 final email = _emailController.text;

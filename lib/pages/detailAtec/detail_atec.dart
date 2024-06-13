@@ -104,7 +104,7 @@ class _AvaliationDetailState extends State<AvaliationDetail> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          detail.content,
+                          '${detail.number} - ${detail.content}',
                           style: const TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,

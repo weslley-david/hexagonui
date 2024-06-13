@@ -64,7 +64,7 @@ class SpecialistListState extends State<SpecialistList> {
                     backgroundImage: NetworkImage("${specialist.imageurl}"),
                   ),
                   title: Text("@${specialist.identifier}"),
-                  subtitle: Text("${specialist.bio}"),
+                  subtitle: Text("${specialist.specialty}"),
                   onTap: () {
                     // Implement navigation or any action here if needed
                   },

@@ -8,6 +8,7 @@ class Specialist {
   String? password;
   String? imageurl;
   String? birthdate;
+  String? specialty;
   String? createdAt;
   String? updatedAt;
 
@@ -21,6 +22,7 @@ class Specialist {
       this.password,
       this.imageurl,
       this.birthdate,
+      this.specialty,
       this.createdAt,
       this.updatedAt});
 
@@ -34,6 +36,7 @@ class Specialist {
     password = json['password'];
     imageurl = json['imageurl'];
     birthdate = json['birthdate'];
+    specialty = json['specialty'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -49,6 +52,7 @@ class Specialist {
     data['password'] = password;
     data['imageurl'] = imageurl;
     data['birthdate'] = birthdate;
+    data['specialty'] = specialty;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;
