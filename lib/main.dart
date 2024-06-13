@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 import 'package:hexagonui/pages/addClient/add_client.dart';
 import 'package:hexagonui/pages/atec/atec.dart';
 import 'package:hexagonui/pages/clientDetail/client_detail.dart';
+import 'package:hexagonui/pages/createClient/create_client.dart';
+import 'package:hexagonui/pages/detailAtec/detail_atec.dart';
+import 'package:hexagonui/pages/removeClient/delete_client.dart';
 import 'package:hexagonui/pages/home/home.dart';
 import 'package:hexagonui/pages/login/login.dart';
 
@@ -42,9 +45,28 @@ final _router = GoRouter(
           );
         }),
     GoRoute(
+        path: '/detailavaliation/:id', // Replace with your actual path
+        name: 'detailavaliation',
+        builder: (context, state) {
+          final avaliationId =
+              state.pathParameters['id'] ?? '0'; // Providing a default value
+
+          return AvaliationDetail(
+            id: int.parse(avaliationId),
+          );
+        }),
+    GoRoute(
         path: '/addclient',
         name: 'addclient',
-        builder: (context, state) => const AddClient())
+        builder: (context, state) => const AddClient()),
+    GoRoute(
+        path: '/removeclient',
+        name: 'removeclient',
+        builder: (context, state) => const RemoveClient()),
+    GoRoute(
+        path: '/createclient',
+        name: 'createclient',
+        builder: (context, state) => const CreateClient())
   ],
 );
 

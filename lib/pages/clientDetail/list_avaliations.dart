@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -62,6 +63,12 @@ class _ListAvaliationsState extends State<ListAvaliations> {
                         ...avaliacao['areas'].map<Widget>((area) {
                           return Text('${area['area']}: ${area['pontuation']}');
                         }).toList(),
+                        TextButton(
+                          child: const Text("detalhar respostas"),
+                          onPressed: () => {
+                            context.push('/detailavaliation/${avaliacao['id']}')
+                          },
+                        )
                       ],
                     ),
                   ),

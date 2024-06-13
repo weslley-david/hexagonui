@@ -46,6 +46,7 @@ class _LoginPageState extends State<LoginPage> {
         await prefs.setString('acetoken', data['acetoken']);
         await prefs.setInt('id', data['id']);
         await prefs.setString('type', data['type']);
+        await prefs.setString('identifier', data['identifier']);
 
         // Navegar para a HomePage
         // ignore: use_build_context_synchronously

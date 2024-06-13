@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:hexagonui/models/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -94,18 +95,16 @@ class _HomePageState extends State<HomePage> {
               leading: const Icon(Icons.add),
             ),
             ListTile(
-              title: const Text('Gerir clientes'),
+              title: const Text('Remover cliente'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                context.push('/removeclient');
               },
-              leading: const Icon(Icons.person_2_outlined),
+              leading: const Icon(Icons.remove),
             ),
             ListTile(
-              title: const Text('Editar meu perfil'),
+              title: const Text('Cadastrar cliente'),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                context.push('/createclient');
               },
               leading: const Icon(
                 Icons.edit_outlined,
@@ -117,8 +116,7 @@ class _HomePageState extends State<HomePage> {
                 style: TextStyle(color: Colors.redAccent),
               ),
               onTap: () {
-                // Update the state of the app.
-                // ...
+                SystemNavigator.pop();
               },
               leading: const Icon(
                 Icons.exit_to_app_outlined,

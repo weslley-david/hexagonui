@@ -83,6 +83,11 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
     return prefs.getString('acetoken');
   }
 
+  Future<String?> getIdentifier() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('identifier');
+  }
+
   final TextEditingController _titleController =
       TextEditingController(text: 'minha avaliação');
   final TextEditingController _observationController = TextEditingController();
@@ -102,6 +107,13 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
     _tabController.dispose();
     super.dispose();
   }
+
+  final Map<String, Color> areaColors = {
+    "Fala/Linguagem/Comunicação": Colors.blue,
+    "Percepção sensorial /cognitiva": Colors.green,
+    "Saúde / Aspectos físicos / Comportamento": Colors.red,
+    "Sociabilidade": Colors.orange,
+  };
 
   void fetchQuestions() {
     // Simulação de fetch das questões de um endpoint
@@ -3275,8 +3287,11 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
         alternativeId: entry.value,
       );
     }).toList();
+
+    String? identifier = await getIdentifier();
+
     Map<String, dynamic> submission = {
-      "title": _titleController.text,
+      "title": '${_titleController.text} - por $identifier',
       "notes": _observationController.text,
       "client": int.parse(widget.client),
       "answers": answers.map((answer) => answer.toJson()).toList(),
@@ -3284,6 +3299,7 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
 
     if (answers.length != 77) {
       //String jsonSubmission = json.encode(submission);
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Todas as questões precisam ser respondidas.'),
@@ -3352,15 +3368,33 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
                     Question question = questions[index];
                     return Card(
                       margin: const EdgeInsets.all(8.0),
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: areaColors[question.area] ??
+                              Colors.black, // Cor da borda com base na área
+                          width: 2.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(question.content,
-                                style: const TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold)),
+                            Text(
+                              question.area,
+                              style: TextStyle(
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.bold,
+                                color:
+                                    areaColors[question.area] ?? Colors.black,
+                              ),
+                            ),
+                            Text(
+                              question.content,
+                              style: const TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
                             const SizedBox(height: 10),
                             ...question.alternatives.map((alternative) {
                               return RadioListTile<int>(
@@ -3384,23 +3418,13 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(
-                    height: 5.0,
-                  ),
+                  const SizedBox(height: 5.0),
                   const Text("Título: "),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
-                  TextField(
-                    controller: _titleController,
-                  ),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
+                  const SizedBox(height: 5.0),
+                  TextField(controller: _titleController),
+                  const SizedBox(height: 5.0),
                   const Text("Observações: "),
-                  const SizedBox(
-                    height: 5.0,
-                  ),
+                  const SizedBox(height: 5.0),
                   TextField(
                     controller: _observationController,
                     minLines: 15,
@@ -3409,7 +3433,7 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
       floatingActionButton: FloatingActionButton(

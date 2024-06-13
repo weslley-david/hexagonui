@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -9,6 +8,7 @@ class AddClient extends StatefulWidget {
   const AddClient({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AddClientState createState() => _AddClientState();
 }
 
@@ -90,7 +90,7 @@ class _AddClientState extends State<AddClient> {
                     identifier = value!;
                   },
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30.0,
                 ),
                 TextFormField(

@@ -1,17 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 
-class DeleteClient extends StatefulWidget {
-  const DeleteClient({super.key});
+class RemoveClient extends StatefulWidget {
+  const RemoveClient({super.key});
 
   @override
-  State<DeleteClient> createState() => _DeleteClientState();
+  State<RemoveClient> createState() => _RemoveClientState();
 }
 
-class _DeleteClientState extends State<DeleteClient> {
+class _RemoveClientState extends State<RemoveClient> {
   final _formKey = GlobalKey<FormState>();
   String identifier = '';
   String feedbackMessage = '';
@@ -60,7 +59,7 @@ class _DeleteClientState extends State<DeleteClient> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Adicionar Cliente'),
+        title: const Text('Remover Cliente'),
       ),
       body: Container(
         decoration: const BoxDecoration(
