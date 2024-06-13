@@ -61,54 +61,46 @@ class _RemoveClientState extends State<RemoveClient> {
       appBar: AppBar(
         title: const Text('Remover Cliente'),
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/background.png'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Identifier'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Por favor, insira o identificador';
-                    }
-                    return null;
-                  },
-                  onSaved: (value) {
-                    identifier = value!;
-                  },
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    Expanded(
-                      child: isLoading
-                          ? const CircularProgressIndicator()
-                          : ElevatedButton(
-                              onPressed: () {
-                                if (_formKey.currentState!.validate()) {
-                                  _formKey.currentState!.save();
-                                  submitData();
-                                }
-                              },
-                              child: const Text('Enviar'),
-                            ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Text(feedbackMessage),
-              ],
-            ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Identifier'),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Por favor, insira o identificador';
+                  }
+                  return null;
+                },
+                onSaved: (value) {
+                  identifier = value!;
+                },
+              ),
+              const SizedBox(height: 20),
+              Row(
+                children: [
+                  Expanded(
+                    child: isLoading
+                        ? const CircularProgressIndicator()
+                        : ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                _formKey.currentState!.save();
+                                submitData();
+                              }
+                            },
+                            child: const Text('Enviar'),
+                          ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20),
+              Text(feedbackMessage),
+            ],
           ),
         ),
       ),

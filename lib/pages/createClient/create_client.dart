@@ -39,6 +39,7 @@ class _CreateClientState extends State<CreateClient> {
         'bio': bio,
         'birthdate': birthdate,
         'gender': _gender,
+        'imageurl': 'https://hexagon-no2i.onrender.com/static/client.png'
       };
 
       String? token = await getAccessToken();

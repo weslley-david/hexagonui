@@ -80,7 +80,7 @@ class BarChartPainter extends CustomPainter {
 
     final double width = size.width;
     final double height = size.height;
-    final Paint barPaint = Paint()..color = Colors.blue;
+    final Paint barPaint = Paint()..color = Colors.deepPurpleAccent;
 
     final double chartWidth = width - 20;
     final double chartHeight = height - 20;

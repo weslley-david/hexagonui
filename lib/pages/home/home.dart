@@ -126,83 +126,86 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Column(
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              TextButton(
-                onPressed: _loadPreviousPage,
-                child: const Text('<<'),
-              ),
-              const SizedBox(
-                width: 15.0,
-              ),
-              Text('$_skip / ${_take + _skip}'),
-              const SizedBox(
-                width: 15.0,
-              ),
-              TextButton(
-                onPressed: _loadNextPage,
-                child: const Text('>>'),
-              ),
-              const SizedBox(
-                width: 15.0,
-              )
-            ],
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: _getClientList(),
-              builder: (context, AsyncSnapshot<List<Client>> snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  if (snapshot.data == null) {
-                    return const Center(child: Text('Something went wrong'));
-                  }
+      body: Container(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: FutureBuilder(
+                future: _getClientList(),
+                builder: (context, AsyncSnapshot<List<Client>> snapshot) {
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    if (snapshot.data == null) {
+                      return const Center(child: Text('Something went wrong'));
+                    }
 
-                  return ListView.builder(
-                      itemCount: snapshot.data?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              width: 1.0,
+                    return ListView.builder(
+                        itemCount: snapshot.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(5.0),
+                              color: const Color(0xFF070707),
                             ),
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: const Color(0xFF070707),
-                          ),
-                          //padding: EdgeInsets.all(20.0),
-                          margin: const EdgeInsets.all(2.0),
-                          child: ListTile(
-                            onTap: () => {
-                              context.push(
-                                  '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
-                            },
-                            leading: const CircleAvatar(
-                              backgroundImage: NetworkImage(
-                                  "https://hexagon-no2i.onrender.com/static/client.png"),
+                            //padding: EdgeInsets.all(20.0),
+                            margin: const EdgeInsets.all(2.0),
+                            child: ListTile(
+                              onTap: () => {
+                                context.push(
+                                    '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
+                              },
+                              leading: const CircleAvatar(
+                                backgroundImage: NetworkImage(
+                                    "https://hexagon-no2i.onrender.com/static/client.png"),
+                              ),
+                              title: Text(
+                                '@${snapshot.data![index].identifier}',
+                              ),
+                              subtitle: Text(
+                                snapshot.data![index].name ?? "not found",
+                              ),
+                              // trailing: TextButton(
+                              //   child: const Icon(
+                              //     Icons.content_paste_go_rounded,
+                              //   ),
+                              //   onPressed: () => {},
+                              // ),
                             ),
-                            title: Text(
-                              '@${snapshot.data![index].identifier}',
-                            ),
-                            subtitle: Text(
-                              snapshot.data![index].name ?? "not found",
-                            ),
-                            // trailing: TextButton(
-                            //   child: const Icon(
-                            //     Icons.content_paste_go_rounded,
-                            //   ),
-                            //   onPressed: () => {},
-                            // ),
-                          ),
-                        );
-                      });
-                }
-                return const Center(child: CircularProgressIndicator());
-              },
+                          );
+                        });
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                },
+              ),
             ),
-          ),
-        ],
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: _loadPreviousPage,
+                  child: const Text('<<'),
+                ),
+                const SizedBox(
+                  width: 15.0,
+                ),
+                Text('$_skip / ${_take + _skip}'),
+                const SizedBox(
+                  width: 15.0,
+                ),
+                TextButton(
+                  onPressed: _loadNextPage,
+                  child: const Text('>>'),
+                ),
+                const SizedBox(
+                  width: 15.0,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

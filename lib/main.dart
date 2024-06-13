@@ -31,13 +31,11 @@ final _router = GoRouter(
       },
     ),
     GoRoute(
-        path: '/detailclient/:id/:name', // Replace with your actual path
+        path: '/detailclient/:id/:name',
         name: 'detailclient',
         builder: (context, state) {
-          final userId =
-              state.pathParameters['id'] ?? '0'; // Providing a default value
-          final userName =
-              state.pathParameters['name'] ?? ''; // Providing a default value
+          final userId = state.pathParameters['id'] ?? '0';
+          final userName = state.pathParameters['name'] ?? '';
 
           return ClientDetail(
             id: userId,
@@ -45,11 +43,10 @@ final _router = GoRouter(
           );
         }),
     GoRoute(
-        path: '/detailavaliation/:id', // Replace with your actual path
+        path: '/detailavaliation/:id',
         name: 'detailavaliation',
         builder: (context, state) {
-          final avaliationId =
-              state.pathParameters['id'] ?? '0'; // Providing a default value
+          final avaliationId = state.pathParameters['id'] ?? '0';
 
           return AvaliationDetail(
             id: int.parse(avaliationId),
@@ -83,6 +80,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
+        //theme: ThemeData.dark(),
         //--------------------------------------------
         // theme: ThemeData(
         //   colorScheme: ColorScheme.fromSeed(
@@ -109,7 +107,7 @@ class MyApp extends StatelessWidget {
         //------------------------------------------------------
         theme: ThemeData(
           brightness: Brightness.dark, // Define o tema como escuro
-          primaryColor: Colors.lightBlue,
+          primaryColor: Colors.purple[200],
           scaffoldBackgroundColor: const Color(0xFF121212),
           appBarTheme: const AppBarTheme(
             backgroundColor: Color(0xFF1F1F1F),
@@ -136,21 +134,21 @@ class MyApp extends StatelessWidget {
             hintStyle: TextStyle(color: Colors.white),
           ),
           buttonTheme: const ButtonThemeData(
-            buttonColor: Colors.lightBlue,
+            buttonColor: Colors.deepPurpleAccent,
             textTheme: ButtonTextTheme.primary,
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.lightBlue,
+              backgroundColor: Colors.deepPurple[200],
               foregroundColor: Colors.white,
             ),
           ),
           floatingActionButtonTheme: const FloatingActionButtonThemeData(
-            backgroundColor: Colors.lightBlue,
+            backgroundColor: Colors.deepPurpleAccent,
           ),
           checkboxTheme: CheckboxThemeData(
             checkColor: MaterialStateProperty.all(Colors.white),
-            fillColor: MaterialStateProperty.all(Colors.lightBlue),
+            fillColor: MaterialStateProperty.all(Colors.purple[200]),
           ),
         ),
         routerConfig: _router);

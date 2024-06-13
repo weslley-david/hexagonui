@@ -86,24 +86,24 @@ class _ClientDetailState extends State<ClientDetail>
                   ),
                   Text(
                     usuario.name ?? "name not found : (",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 30,
-                      color: Colors.blue,
+                      color: Colors.deepPurple[200],
                     ),
                   ),
                   Text(
                     usuario.identifier ?? "no identifier",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
-                      color: Colors.blue,
+                      color: Colors.deepPurple[200],
                     ),
                   ),
                   Text(
                     usuario.bio ?? "bio not found : (",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 15,
-                      color: Colors.blue,
+                      color: Colors.deepPurple[200],
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -116,7 +116,11 @@ class _ClientDetailState extends State<ClientDetail>
                       ),
                       Tab(
                         icon: Icon(Icons.auto_graph_outlined),
-                        text: "cliente",
+                        text: "progresso por área",
+                      ),
+                      Tab(
+                        icon: Icon(Icons.list),
+                        text: "avaliações atec",
                       ),
                       Tab(
                         icon: Icon(Icons.content_paste),
@@ -125,10 +129,6 @@ class _ClientDetailState extends State<ClientDetail>
                       Tab(
                         icon: Icon(Icons.family_restroom),
                         text: "familiares",
-                      ),
-                      Tab(
-                        icon: Icon(Icons.list),
-                        text: "avaliações atec",
                       ),
                     ],
                   ),
@@ -139,9 +139,9 @@ class _ClientDetailState extends State<ClientDetail>
                       children: <Widget>[
                         AtecInsights(clientId: "${usuario.id}"),
                         ShowAtecEvolution(clientId: "${usuario.id}"),
+                        ListAvaliations(clientId: "${usuario.id}"),
                         SpecialistList(clientId: "${usuario.id}"),
                         GuardianList(clientId: "${usuario.id}"),
-                        ListAvaliations(clientId: "${usuario.id}")
                       ],
                     ),
                   ),
