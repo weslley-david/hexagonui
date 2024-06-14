@@ -105,15 +105,6 @@ class _HomePageState extends State<HomePage> {
               leading: const Icon(Icons.remove),
             ),
             ListTile(
-              title: const Text('Cadastrar cliente'),
-              onTap: () {
-                context.push('/createclient');
-              },
-              leading: const Icon(
-                Icons.edit_outlined,
-              ),
-            ),
-            ListTile(
               title: const Text(
                 'Sair',
                 style: TextStyle(color: Colors.redAccent),
@@ -163,8 +154,9 @@ class _HomePageState extends State<HomePage> {
                               context.push(
                                   '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
                             },
-                            leading: const CircleAvatar(
-                              backgroundImage: NetworkImage(
+                            leading: CircleAvatar(
+                              backgroundImage: NetworkImage(snapshot
+                                      .data![index].imageurl ??
                                   "https://hexagon-no2i.onrender.com/static/client.png"),
                             ),
                             title: Text(
