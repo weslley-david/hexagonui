@@ -42,6 +42,9 @@ class _HomePageState extends State<HomePage> {
 
     if (response.statusCode == 200) {
       List<dynamic> jsonList = jsonDecode(response.body);
+      if (jsonList.isEmpty) {
+        return [];
+      }
       return jsonList.map((item) => Client.fromJson(item)).toList();
     } else {
       throw Exception('Failed to load client list');
@@ -135,47 +138,45 @@ class _HomePageState extends State<HomePage> {
                 future: _getClientList(),
                 builder: (context, AsyncSnapshot<List<Client>> snapshot) {
                   if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.data == null) {
+                    if (snapshot.hasError) {
                       return const Center(child: Text('Something went wrong'));
                     }
 
+                    if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return const Center(child: Text('No data available'));
+                    }
+
                     return ListView.builder(
-                        itemCount: snapshot.data?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(
-                                width: 1.0,
-                              ),
-                              borderRadius: BorderRadius.circular(5.0),
-                              color: const Color(0xFF070707),
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              width: 1.0,
                             ),
-                            //padding: EdgeInsets.all(20.0),
-                            margin: const EdgeInsets.all(2.0),
-                            child: ListTile(
-                              onTap: () => {
-                                context.push(
-                                    '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
-                              },
-                              leading: const CircleAvatar(
-                                backgroundImage: NetworkImage(
-                                    "https://hexagon-no2i.onrender.com/static/client.png"),
-                              ),
-                              title: Text(
-                                '@${snapshot.data![index].identifier}',
-                              ),
-                              subtitle: Text(
-                                snapshot.data![index].name ?? "not found",
-                              ),
-                              // trailing: TextButton(
-                              //   child: const Icon(
-                              //     Icons.content_paste_go_rounded,
-                              //   ),
-                              //   onPressed: () => {},
-                              // ),
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: const Color(0xFF070707),
+                          ),
+                          margin: const EdgeInsets.all(2.0),
+                          child: ListTile(
+                            onTap: () => {
+                              context.push(
+                                  '/detailclient/${snapshot.data![index].id}/${snapshot.data![index].identifier}')
+                            },
+                            leading: const CircleAvatar(
+                              backgroundImage: NetworkImage(
+                                  "https://hexagon-no2i.onrender.com/static/client.png"),
                             ),
-                          );
-                        });
+                            title: Text(
+                              '@${snapshot.data![index].identifier}',
+                            ),
+                            subtitle: Text(
+                              snapshot.data![index].name ?? "not found",
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   }
                   return const Center(child: CircularProgressIndicator());
                 },
