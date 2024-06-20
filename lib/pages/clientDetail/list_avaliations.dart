@@ -84,12 +84,24 @@ class _ListAvaliationsState extends State<ListAvaliations> {
                                   return Text(
                                       '${area['area']}: ${area['pontuation']}');
                                 }).toList(),
-                                TextButton(
-                                  child: const Text("detalhar respostas"),
-                                  onPressed: () => {
-                                    context.push(
-                                        '/detailavaliation/${avaliacao['id']}')
-                                  },
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    TextButton(
+                                      child: const Text("detalhar respostas"),
+                                      onPressed: () => {
+                                        context.push(
+                                            '/detailavaliation/${avaliacao['id']}')
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text("gerar sugestões"),
+                                      onPressed: () => {
+                                        context.push(
+                                            '/atecrecommendations/${int.parse(widget.clientId)}/${avaliacao['id']}')
+                                      },
+                                    ),
+                                  ],
                                 )
                               ],
                             ),
