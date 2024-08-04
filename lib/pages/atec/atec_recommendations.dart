@@ -21,11 +21,20 @@ class _AtecRecommendationPageState extends State<AtecRecommendationPage> {
     );
 
     if (response.statusCode == 200) {
-      return json.decode(utf8.decode(response.bodyBytes));
+      final responseBody = utf8.decode(response.bodyBytes);
+      print('Response Body: $responseBody'); // Debugging line
+      return json.decode(responseBody);
     } else {
       throw Exception('Failed to load recommendations');
     }
   }
+
+  final Map<String, Color> areaColors = {
+    "Fala/Linguagem/Comunicação": Colors.blue,
+    "Percepção sensorial /cognitiva": Colors.green,
+    "Saúde / Aspectos físicos / Comportamento": Colors.red,
+    "Sociabilidade": Colors.orange,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -43,20 +52,30 @@ class _AtecRecommendationPageState extends State<AtecRecommendationPage> {
           } else if (!snapshot.hasData || snapshot.data == null) {
             return const Center(child: Text('No data found'));
           } else {
-            final recommendations =
-                snapshot.data!['recommended_questions'] as List<dynamic>;
+            final filteredQuestions =
+                snapshot.data!['filtered_questions'] as List<dynamic>?;
+
+            if (filteredQuestions == null) {
+              return const Center(child: Text('No filtered questions found'));
+            }
+
             return ListView.builder(
-              itemCount: recommendations.length,
+              itemCount: filteredQuestions.length,
               itemBuilder: (context, index) {
-                final question = recommendations[index];
+                final question = filteredQuestions[index];
+                final area = question['area'] as String;
+                final borderColor = areaColors[area] ??
+                    Colors.grey; // Default color if area is not found
+
                 return Container(
                   margin: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                    border: Border.all(color: borderColor),
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                   child: ListTile(
-                    title: Text('${question['content']}'),
+                    title:
+                        Text('${question['number']} - ${question['content']}'),
                     subtitle: Text(question['area']),
                   ),
                 );
