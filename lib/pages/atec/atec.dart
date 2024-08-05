@@ -133,6 +133,7 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
         String errorMessage =
             'Erro ao buscar perguntas: ${response.statusCode}';
         // Exiba um snackbar ou um alerta para o usuário
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(errorMessage),
@@ -144,6 +145,7 @@ class _AtecState extends State<Atec> with TickerProviderStateMixin {
       // Trate qualquer exceção que possa ocorrer
       String errorMessage = 'Ocorreu um erro ao buscar perguntas: $e';
       // Exiba um snackbar ou um alerta para o usuário
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(errorMessage),

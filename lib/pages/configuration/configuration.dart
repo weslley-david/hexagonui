@@ -16,17 +16,17 @@ class _ConfigurationState extends State<Configuration> {
       barrierDismissible: false, // Não permite fechar o diálogo ao tocar fora
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Confirmação de Exclusão"),
-          content: Text("Tem certeza que deseja deletar seus dados?"),
+          title: const Text("Confirmação de Exclusão"),
+          content: const Text("Tem certeza que deseja deletar seus dados?"),
           actions: <Widget>[
             TextButton(
-              child: Text("Cancelar"),
+              child: const Text("Cancelar"),
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
             ),
             TextButton(
-              child: Text("Deletar"),
+              child: const Text("Deletar"),
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
@@ -55,14 +55,14 @@ class _ConfigurationState extends State<Configuration> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Configurações"),
+        title: const Text("Configurações"),
       ),
       body: Center(
         child: TextButton(
           onPressed: _confirmDeletion,
           child: Text(
             message,
-            style: TextStyle(color: Colors.red),
+            style: const TextStyle(color: Colors.red),
           ),
         ),
       ),

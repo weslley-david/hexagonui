@@ -7,9 +7,10 @@ class AtecRecommendationPage extends StatefulWidget {
   final int avaliation;
 
   const AtecRecommendationPage(
-      {required this.client, required this.avaliation});
+      {super.key, required this.client, required this.avaliation});
 
   @override
+  // ignore: library_private_types_in_public_api
   _AtecRecommendationPageState createState() => _AtecRecommendationPageState();
 }
 
@@ -22,7 +23,7 @@ class _AtecRecommendationPageState extends State<AtecRecommendationPage> {
 
     if (response.statusCode == 200) {
       final responseBody = utf8.decode(response.bodyBytes);
-      print('Response Body: $responseBody'); // Debugging line
+      //print('Response Body: $responseBody'); // Debugging line
       return json.decode(responseBody);
     } else {
       throw Exception('Failed to load recommendations');
