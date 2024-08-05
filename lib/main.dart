@@ -4,6 +4,7 @@ import 'package:hexagonui/pages/addClient/add_client.dart';
 import 'package:hexagonui/pages/atec/atec.dart';
 import 'package:hexagonui/pages/atec/atec_recommendations.dart';
 import 'package:hexagonui/pages/clientDetail/client_detail.dart';
+import 'package:hexagonui/pages/configuration/configuration.dart';
 import 'package:hexagonui/pages/detailAtec/detail_atec.dart';
 import 'package:hexagonui/pages/removeClient/delete_client.dart';
 import 'package:hexagonui/pages/home/home.dart';
@@ -66,6 +67,10 @@ final _router = GoRouter(
         name: 'addclient',
         builder: (context, state) => const AddClient()),
     GoRoute(
+        path: '/configuration',
+        name: 'configuration',
+        builder: (context, state) => const Configuration()),
+    GoRoute(
         path: '/removeclient',
         name: 'removeclient',
         builder: (context, state) => const RemoveClient()),
@@ -112,7 +117,7 @@ class MyApp extends StatelessWidget {
         //------------------------------------------------------
         theme: ThemeData(
           brightness: Brightness.dark, // Define o tema como escuro
-          primaryColor: Colors.purple[200],
+          primaryColor: Colors.deepPurple[200],
           scaffoldBackgroundColor: const Color(0xFF121212),
           appBarTheme: const AppBarTheme(
             backgroundColor: Color(0xFF1F1F1F),
@@ -144,7 +149,7 @@ class MyApp extends StatelessWidget {
           ),
           elevatedButtonTheme: ElevatedButtonThemeData(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.deepPurple[200],
+              backgroundColor: Colors.deepPurple[300],
               foregroundColor: Colors.white,
             ),
           ),
@@ -153,7 +158,7 @@ class MyApp extends StatelessWidget {
           ),
           checkboxTheme: CheckboxThemeData(
             checkColor: MaterialStateProperty.all(Colors.white),
-            fillColor: MaterialStateProperty.all(Colors.purple[200]),
+            fillColor: MaterialStateProperty.all(Colors.purple[300]),
           ),
         ),
         routerConfig: _router);

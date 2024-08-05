@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:hexagonui/models/client.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/cupertino.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -103,6 +104,15 @@ class _HomePageState extends State<HomePage> {
                 context.push('/removeclient');
               },
               leading: const Icon(Icons.remove),
+            ),
+            ListTile(
+              title: const Text('Configuration'),
+              onTap: () {
+                context.push('/configuration');
+              },
+              leading: const Icon(
+                CupertinoIcons.gear,
+              ),
             ),
             ListTile(
               title: const Text(

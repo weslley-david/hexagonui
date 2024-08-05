@@ -117,8 +117,8 @@ class _LoginPageState extends State<LoginPage> {
               _isLoading
                   ? const CircularProgressIndicator(
                       strokeCap: StrokeCap.square,
-                      //color: Colors.white,
-                      backgroundColor: Colors.deepPurpleAccent,
+                      color: Colors.deepPurpleAccent,
+                      //backgroundColor: Colors.lightBlue,
                     )
                   : SizedBox(
                       width: double.infinity,
@@ -127,6 +127,8 @@ class _LoginPageState extends State<LoginPage> {
                           // Espaçamento entre os botões
                           Expanded(
                             child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.deepPurple[200]),
                               onPressed: () {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -142,9 +144,6 @@ class _LoginPageState extends State<LoginPage> {
                           const SizedBox(width: 10),
                           Expanded(
                             child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.deepPurple[400],
-                              ),
                               onPressed: () async {
                                 final email = _emailController.text;
                                 final password = _passwordController.text;
