@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:hexagonui/models/atec_evolution.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ShowAtecEvolution extends StatefulWidget {
   final String clientId;
@@ -24,10 +25,20 @@ class _ShowAtecEvolutionState extends State<ShowAtecEvolution> {
     _fetchAtecEvolution();
   }
 
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   Future<void> _fetchAtecEvolution() async {
     try {
-      final response = await http.get(Uri.parse(
-          'https://hexagon-no2i.onrender.com/atec/listevolutionbyarea?client=${widget.clientId}')); // Coloque a URL do seu endpoint aqui
+      String? token = await getAccessToken();
+      final response = await http.get(
+          Uri.parse(
+              'https://hexagon-no2i.onrender.com/atec/listevolutionbyarea?client=${widget.clientId}'),
+          headers: {
+            'Authorization': '$token'
+          }); // Coloque a URL do seu endpoint aqui
       if (response.statusCode == 200) {
         setState(() {
           final jsonBody = jsonDecode(response.body);

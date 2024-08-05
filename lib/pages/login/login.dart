@@ -117,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
               _isLoading
                   ? const CircularProgressIndicator(
                       strokeCap: StrokeCap.square,
-                      color: Colors.white,
+                      //color: Colors.white,
                       backgroundColor: Colors.deepPurpleAccent,
                     )
                   : SizedBox(

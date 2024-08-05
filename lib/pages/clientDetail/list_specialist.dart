@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexagonui/models/specialist.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SpecialistList extends StatefulWidget {
   final String clientId;
@@ -13,7 +14,13 @@ class SpecialistList extends StatefulWidget {
 }
 
 class SpecialistListState extends State<SpecialistList> {
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   Future<List<Specialist>> _getSpecialistList() async {
+    String? token = await getAccessToken();
     final Map<String, String> queryParams = {
       'skip': '0',
       'take': '2',
@@ -26,6 +33,7 @@ class SpecialistListState extends State<SpecialistList> {
     final response = await http.get(
       uri,
       headers: {
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );

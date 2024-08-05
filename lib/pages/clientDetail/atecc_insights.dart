@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hexagonui/models/atec_result.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AtecInsights extends StatefulWidget {
   final String clientId;
@@ -12,9 +13,16 @@ class AtecInsights extends StatefulWidget {
   State<AtecInsights> createState() => _AtecInsightsState();
 }
 
+Future<String?> getAccessToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('acetoken');
+}
+
 class _AtecInsightsState extends State<AtecInsights> {
   Future<List<AtecResult>> _getAtecResultsList() async {
     final Map<String, String> queryParams = {'client': widget.clientId};
+
+    String? token = await getAccessToken();
 
     final uri = Uri.https(
         'hexagon-no2i.onrender.com', '/atec/resultoflasttest', queryParams);
@@ -22,6 +30,7 @@ class _AtecInsightsState extends State<AtecInsights> {
     final response = await http.get(
       uri,
       headers: {
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );

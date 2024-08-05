@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AvaliationDetailContent {
   final int number;
@@ -28,9 +29,17 @@ class AvaliationDetailContent {
   }
 }
 
+Future<String?> getAccessToken() async {
+  final prefs = await SharedPreferences.getInstance();
+  return prefs.getString('acetoken');
+}
+
 Future<List<AvaliationDetailContent>> fetchAvaliationDetails(int id) async {
-  final response = await http.get(Uri.parse(
-      'https://hexagon-no2i.onrender.com/atec/answersbyavaliationid?id=$id'));
+  String? token = await getAccessToken();
+  final response = await http.get(
+      Uri.parse(
+          'https://hexagon-no2i.onrender.com/atec/answersbyavaliationid?id=$id'),
+      headers: {'Authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     List<dynamic> body = json.decode(response.body);

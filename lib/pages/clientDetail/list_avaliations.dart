@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:shared_preferences/shared_preferences.dart';
+
 class ListAvaliations extends StatefulWidget {
   final String clientId;
   const ListAvaliations({super.key, required this.clientId});
@@ -16,6 +18,11 @@ class _ListAvaliationsState extends State<ListAvaliations> {
   bool isLoading = true;
   bool hasError = false;
 
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   @override
   void initState() {
     super.initState();
@@ -23,9 +30,12 @@ class _ListAvaliationsState extends State<ListAvaliations> {
   }
 
   Future<void> fetchAvaliations() async {
+    String? token = await getAccessToken();
     try {
-      final response = await http.get(Uri.parse(
-          'https://hexagon-no2i.onrender.com/atec/listatectestsbyclientid?skip=0&take=30&client=${widget.clientId}'));
+      final response = await http.get(
+          Uri.parse(
+              'https://hexagon-no2i.onrender.com/atec/listatectestsbyclientid?skip=0&take=30&client=${widget.clientId}'),
+          headers: {'Authorization': 'Bearer $token'});
       if (response.statusCode == 200) {
         setState(() {
           final jsonBody = json.decode(response.body);

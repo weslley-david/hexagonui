@@ -8,6 +8,7 @@ import 'package:hexagonui/pages/clientDetail/show_atec_evolution.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:hexagonui/models/client.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'list_specialist.dart';
 
 class ClientDetail extends StatefulWidget {
@@ -36,9 +37,16 @@ class _ClientDetailState extends State<ClientDetail>
     super.dispose();
   }
 
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   Future<Client> fetchUsuario() async {
+    String? token = await getAccessToken();
     final response = await http.get(
-        Uri.parse('https://hexagon-no2i.onrender.com/client/${widget.id}'));
+        Uri.parse('https://hexagon-no2i.onrender.com/client/${widget.id}'),
+        headers: {'Authorization': 'Bearer $token'});
     if (response.statusCode == 200) {
       final dynamic data = json.decode(response.body);
       return Client.fromJson(data);

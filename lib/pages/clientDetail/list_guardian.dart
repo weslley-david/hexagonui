@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:hexagonui/models/guardian.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class GuardianList extends StatefulWidget {
   final String clientId;
@@ -13,7 +14,13 @@ class GuardianList extends StatefulWidget {
 }
 
 class _GuardianListState extends State<GuardianList> {
+  Future<String?> getAccessToken() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('acetoken');
+  }
+
   Future<List<Guardian>> _getGuardianList() async {
+    String? token = await getAccessToken();
     final Map<String, String> queryParams = {
       'skip': '0',
       'take': '2',
@@ -26,6 +33,7 @@ class _GuardianListState extends State<GuardianList> {
     final response = await http.get(
       uri,
       headers: {
+        'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
       },
     );
